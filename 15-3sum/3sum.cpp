@@ -33,7 +33,19 @@ public:
 
         //Optimal Approach
         // using two pointer approach
-
+       // In this two pointer approach first we have sorted the array
+       // and then we have creted a 2d array to store the triplet 
+       //then we have traverse the array at first we've checked if i>0 && nums[i] == nums[i-1] if that'e the case then we have to continue
+       // first pointer will point to i+1;
+       // second pointer to last element 
+       // while(j<k) concition whenever the two pointer intersect it will terminate
+       // store the sum of the three elements in the variable
+       // if(sum<0) then we have to increase j++;
+       // else if(sum>0) then we have to decrease k--
+       // and if(sum == 0) we have to store tht triplet in temp array 
+       // and then store that triple in the 2d array result
+       //and then we have also applied two more contion of (while j<k && nums[j] == nums[j-1] j++) this condition is applied when sum is 0
+       // and while(j<K && nums[k]==nums[k+1] k--) this condition is applied when sum is 0 
         sort(nums.begin(),nums.end());
         vector<vector<int>>res;
         int j,k,sum;
