@@ -51,6 +51,7 @@ public:
         // }
         
         //Optimized Approach
+        //finally able to optimize it by my self although for brute and to know the intution i have to gont through the video solution 
         while(low<=high){
             int mid = (low+high)/2;
             if(possible(bloomDay,mid,m,k)){
