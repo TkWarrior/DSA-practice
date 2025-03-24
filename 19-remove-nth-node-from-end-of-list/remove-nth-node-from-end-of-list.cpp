@@ -44,7 +44,7 @@ public:
         if(deleteNode){
              
        
-         l1->next = deleteNode->next;
+         l1->next = l1->next->next;
          delete deleteNode;
         }
        
