@@ -11,38 +11,23 @@
 class Solution {
 public:
     ListNode* oddEvenList(ListNode* head) {
-        ListNode* temp = head;
-        vector<int>arr;
-
-        //Edge cases
+        ListNode* odd = head;
+       
+        
         if(head==NULL || head->next ==NULL){
             return head;
         }
-        //first we will store the add index linked list to the array it is the 1 - based indexing
-        while(temp!=NULL && temp->next!=NULL){
-            arr.push_back(temp->val);
-            temp = temp->next->next;
+        ListNode* even = head->next;
+        ListNode* evenHead = head->next;
+        while(even!=NULL && even->next!=NULL ){
+           
+            odd->next = odd->next->next;
+            even->next = even->next->next;
+            odd = odd->next;
+            even = even->next;
         }
-
-        // this is the condition when temp!=NULL but temp->next = NULL iss case mein fir hum array mein wo last element push kar denge
-        if(temp){
-            arr.push_back(temp->val);
-        }
-        //after that we will store the even index linked list to the array
-        temp = head->next;
-        while(temp!=NULL && temp->next!=NULL){
-            arr.push_back(temp->val);
-            temp = temp->next->next;
-        }
-        if(temp){
-            arr.push_back(temp->val);
-        }
+        odd->next = evenHead;
         
-        temp = head;
-        for(int i = 0 ; i<arr.size() ; i++){
-            temp->val = arr[i];
-            temp = temp->next;
-        }
         return head;
     }
 };
