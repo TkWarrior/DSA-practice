@@ -10,15 +10,7 @@
  */
 class Solution {
 public:
-    ListNode* findMid(ListNode*head){
-       ListNode*fast = head->next;
-       ListNode*slow = head;
-       while(fast!=NULL && fast->next!=NULL){
-            slow = slow->next;
-            fast = fast->next->next;
-       }
-       return slow;
-    }
+    
     ListNode* mergetwoSortedList(ListNode*l1,ListNode*l2 ){
         ListNode*third = NULL;
         ListNode*last;
@@ -61,12 +53,24 @@ public:
        if(head==NULL || head->next==NULL){
             return head;
        }
-       ListNode*middle = findMid(head);
+       
+       ListNode*fast = head->next;
+       
+       ListNode*slow = head;
+       
+       while(fast!=NULL && fast->next!=NULL){
+            slow = slow->next;
+            fast = fast->next->next;
+       }
+       ListNode*middle = slow;
        
        ListNode*rightHead  = middle->next;
        middle->next = NULL;
+       
        ListNode*leftHead = head;
+       
        leftHead = sortList(leftHead);
+       
        rightHead = sortList(rightHead);
 
        return mergetwoSortedList(leftHead,rightHead);
