@@ -30,19 +30,32 @@ public:
         // }
         // return head;
 
-        // optimal soln - O(n) time complexity and O(1) space complexity
-        ListNode* temp = head;
+        // optimal soln - 1 - O(n) time complexity and O(1) space complexity
+        // ListNode* temp = head;
         
-        ListNode* prev = NULL;
-        while(temp!=NULL ){
-            ListNode* front = temp->next;
-            temp->next = prev;
+        // ListNode* prev = NULL;
+        // while(temp!=NULL ){
+        //     ListNode* front = temp->next;
+        //     temp->next = prev;
             
-            prev = temp;
+        //     prev = temp;
             
-            temp = front;
+        //     temp = front;
+        // }
+        
+        // return prev;
+
+        //optimal soln -2 using recursion
+         //base case - if there is any empty node or any single node present 
+        if(head==NULL || head->next==NULL){
+            return head;
         }
-        // head = current;
-        return prev;
+        ListNode*newHead = reverseList(head->next);
+        ListNode*front = head->next;
+        front->next = head;
+        head->next = NULL;
+
+        return newHead;
+         
     }
 };
