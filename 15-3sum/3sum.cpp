@@ -46,32 +46,58 @@ public:
        // and then store that triple in the 2d array result
        //and then we have also applied two more contion of (while j<k && nums[j] == nums[j-1] j++) this condition is applied when sum is 0
        // and while(j<K && nums[k]==nums[k+1] k--) this condition is applied when sum is 0 
+        // sort(nums.begin(),nums.end());
+        // vector<vector<int>>res;
+        // int j,k,sum;
+        // int n = nums.size();
+        // for(int i = 0 ; i<n ; i++){
+        //     if(i>0 && nums[i]==nums[i-1]) continue;
+        //     j = i+1;
+        //     k = n-1;
+        //     while(j<k){
+        //         sum = nums[i]+nums[j]+nums[k];
+        //         if(sum<0){
+        //             j++;
+        //         }
+        //         else if(sum>0){
+        //             k--;
+        //         }
+        //         else{
+        //             vector<int>temp = {nums[i],nums[j],nums[k]};
+        //             res.push_back(temp);
+        //             j++;
+        //             k--;
+        //             while(j<k && nums[j]==nums[j-1]) j++;
+        //             while(j<k && nums[k]==nums[k+1]) k--;
+        //         }
+        //     }
+        // }
+        // return res;
+
         sort(nums.begin(),nums.end());
-        vector<vector<int>>res;
-        int j,k,sum;
-        int n = nums.size();
-        for(int i = 0 ; i<n ; i++){
+        vector<vector<int>> ans;
+        for(int i = 0 ; i<nums.size() ; i++){
             if(i>0 && nums[i]==nums[i-1]) continue;
-            j = i+1;
-            k = n-1;
+
+            int j = i+1;
+            int k = nums.size()-1;
             while(j<k){
-                sum = nums[i]+nums[j]+nums[k];
-                if(sum<0){
-                    j++;
-                }
-                else if(sum>0){
-                    k--;
-                }
+                int sum = nums[i]+nums[j]+nums[k];
+                if(sum<0) j++;
+                else if(sum>0) k--;
                 else{
                     vector<int>temp = {nums[i],nums[j],nums[k]};
-                    res.push_back(temp);
+                    ans.push_back(temp);
                     j++;
                     k--;
                     while(j<k && nums[j]==nums[j-1]) j++;
                     while(j<k && nums[k]==nums[k+1]) k--;
+                    
                 }
             }
+            
         }
-        return res;
+        return ans;
+
     }
 };
