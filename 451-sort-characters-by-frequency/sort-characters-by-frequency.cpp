@@ -2,7 +2,9 @@ class Solution {
 public:
     typedef pair<char,int>P;
     string frequencySort(string s) {
-        
+        // learnt about lambda - in  this problem it is used for custom sorting 
+        // vector mein pair bhi store kara sakte hai like in this case we have used the pair of character and its frequency inside the vector
+        // vector<pair<char,int>>>vec(123)
         vector<P>vec(123);
         string result = "";
         for(char &ch : s){
