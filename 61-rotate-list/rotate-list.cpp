@@ -19,10 +19,13 @@ public:
     }
     ListNode *first = head;
     int size = 1;
+    //first calculate the size of the linked list
     while(first->next!=NULL){
         first = first->next;
         size++;
     }
+    // then take k%size if it gives 0 then return the head as it is
+    // for linked list size is 4 and rotation 4 times thenn 4%4 == 0
     int rotate = k%size;
     if(rotate == 0){
         return head;
