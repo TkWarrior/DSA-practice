@@ -6,9 +6,9 @@ public:
         vector<int>result;
         stack<int>st;
         // inititally we're storing -1 value to the corresponding keys 
-        for(int i = 0 ; i<nums1.size() ; i++){
-            umap[nums1[i]] = -1;
-        }
+        // for(int i = 0 ; i<nums1.size() ; i++){
+        //     umap[nums1[i]] = -1;
+        // }
        
         for(int j = nums2.size()-1 ; j>=0 ; j--){
             while(!st.empty() && st.top()<=nums2[j]){
