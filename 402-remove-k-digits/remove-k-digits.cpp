@@ -6,7 +6,7 @@ public:
         int len = num.size();
         string ans = "";
         stack<char>st;
-        int count = 0;
+     
         
         for(char ch:num){
             while(!st.empty() && st.top()>ch && k>0){
@@ -16,10 +16,13 @@ public:
 
             st.push(ch);
         }
+        // if the k > 0 valid for test cases like num = "9"
         while(!st.empty() && k>0){
             st.pop();
             k--;
         }
+
+
         while(!st.empty()){
             ans.push_back(st.top());
             st.pop();
