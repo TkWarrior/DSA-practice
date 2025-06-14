@@ -25,7 +25,7 @@ public:
         vector<int>result;
         for(int i = 0 ; i<n ; i++){
             //storing only window element in the deque 
-            if(!dq.empty() && dq.front() == i-k){
+            if(!dq.empty() && dq.front() <= i-k){
                 dq.pop_front();
             }
             while(!dq.empty() && nums[dq.back()]<nums[i]){
