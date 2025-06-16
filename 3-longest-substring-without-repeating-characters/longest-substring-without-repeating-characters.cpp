@@ -3,19 +3,18 @@ public:
     int lengthOfLongestSubstring(string s) {
 
         //Brute force
-       unordered_map<char,int>umap;
+       
        int n = s.length();
         int maxi = 0 ;
       
        for(int i = 0 ; i<n ; i++){
-         
-            umap = {};
+           int hash[256] = {0};
            for(int j=i ; j<n ;j++){
-                if(umap.find(s[j])!=umap.end()){
+                if(hash[s[j]]==1){
                     break;
                 }
                 int len = j-i+1;
-                umap[s[j]] = 1;
+                hash[s[j]] = 1;
                 maxi = max(len,maxi);
            }
        
