@@ -33,28 +33,57 @@ public:
         // if no_of_zeroes<=k then we have to find the length of the sliding window 
         // and decrease the zero by 1
 
-        int n = nums.size();
-        int l = 0 , r = 0 ; 
-        int no_of_zeroes = 0;
-        int len = 0;
-        int max_len = 0 ;
-        while(r<n){
-            if(nums[r]==0){
-                no_of_zeroes++;
-            }
-            // whenever the no_of_zero exceed the limit k we will shrink the window  in a sliding window at most k zeroes can be present
-            while(no_of_zeroes>k){
-                if(nums[l]==0){
-                    no_of_zeroes --;
-                }         
-                l++;
-            }
-            if(no_of_zeroes<=k){
-                    len = r-l+1;
-                    max_len = max(max_len,len);
-            }
-            r++;
+    //     int n = nums.size();
+    //     int l = 0 , r = 0 ; 
+    //     int no_of_zeroes = 0;
+    //     int len = 0;
+    //     int max_len = 0 ;
+    //     while(r<n){
+    //         if(nums[r]==0){
+    //             no_of_zeroes++;
+    //         }
+    //         // whenever the no_of_zero exceed the limit k we will shrink the window  in a sliding window at most k zeroes can be present
+    //         while(no_of_zeroes>k){
+    //             if(nums[l]==0){
+    //                 no_of_zeroes --;
+    //             }         
+    //             l++;
+    //         }
+           
+    //         if(no_of_zeroes<=k){
+    //                 len = r-l+1;
+    //                 max_len = max(max_len,len);
+    //         }
+    //         r++;
+    //     }
+    //    return max_len;
+
+    // Most Optimal Soln 
+    // In this case we've done slight change in the optimal soln instead of shrinking the sliding window at once once what we are doing is that we are not allowing to increase the length allowing only if there is no_of zeroes<= k 
+
+    int l = 0, r = 0;
+    int n = nums.size();
+    int len = 0 , max_len = 0;
+    int no_of_zeroes = 0;
+    while(r<n){
+        
+        if(nums[r]==0) {
+            no_of_zeroes++;
         }
-       return max_len;
+        
+        if(no_of_zeroes>k){
+            if(nums[l]==0){
+                no_of_zeroes--;
+            }  
+           l++;
+        }
+
+        if(no_of_zeroes<=k){
+            len = r-l+1;
+            max_len = max(max_len,len);
+        }
+        r++;
+    }
+    return max_len;
     }
 };
