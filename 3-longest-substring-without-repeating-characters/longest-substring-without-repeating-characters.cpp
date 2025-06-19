@@ -28,12 +28,14 @@ public:
         int maxi = 0;
         int len = 1;
         while(r<n){
+            // if the element is present in the hashmap and the index of which is greater then l  
             if(hashmap.find(s[r])!=hashmap.end()){
                 if(hashmap[s[r]]>=l){
                      l = hashmap[s[r]]+1;
                 }         
             }
-            len = r-l+1;  
+            len = r-l+1; 
+            // storing in the hashmap with its corressponding index 
             hashmap[s[r]] = r;  
             maxi = max(maxi , len);
             r++;
