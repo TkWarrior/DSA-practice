@@ -37,7 +37,7 @@ public:
         while(r<n){
             hashmap[s[r]-'A']++;
             max_freq = max(max_freq,hashmap[s[r]-'A']);
-            while((r-l+1)-max_freq > k){
+            if((r-l+1)-max_freq > k){
                hashmap[s[l]-'A']--;
                
                 l++;
