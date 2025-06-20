@@ -39,10 +39,7 @@ public:
             max_freq = max(max_freq,hashmap[s[r]-'A']);
             while((r-l+1)-max_freq > k){
                hashmap[s[l]-'A']--;
-               max_freq = 0;
-                for(int i = 0 ; i<26 ; i++) {
-                    max_freq = max(max_freq,hashmap[i]);
-                }
+               
                 l++;
             }
             if((r-l+1)-max_freq<=k){
