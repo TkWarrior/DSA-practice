@@ -30,11 +30,12 @@ public:
         while(r<n){
             hashmap[fruits[r]]++;
             if(hashmap.size()>2){
-                while(hashmap.size()>2){        
+                while(hashmap.size()>2){  
+                        
                     hashmap[fruits[l]]--;
-                    if(hashmap[fruits[l]]==0){
+                     if(hashmap[fruits[l]]==0){
                         hashmap.erase(fruits[l]);
-                    }
+                    } 
                     l++;
                   
                 }
