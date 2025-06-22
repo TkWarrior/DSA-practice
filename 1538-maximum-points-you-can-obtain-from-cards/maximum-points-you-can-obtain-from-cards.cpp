@@ -11,9 +11,10 @@ public:
 
         max_sum = max(max_sum , sum);
 
-        for(int i=l ; i>=0 ; i--){
-            sum = sum - cardPoints[i];
-            sum = sum + cardPoints[r];
+        while(l>=0){
+            sum -=cardPoints[l];
+            sum +=cardPoints[r];
+            l--;
             r--;
             max_sum = max(max_sum,sum);
         }
