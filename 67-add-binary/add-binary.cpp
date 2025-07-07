@@ -17,9 +17,8 @@ public:
             if(i<blen){
                 sum+=b[blen-i-1]-'0';
             }
-           
-            int val = sum%2;
-            ans = to_string(val) + ans;
+        
+            ans = to_string(sum%2) + ans;
             carry = sum/2;
             i++;
         }
