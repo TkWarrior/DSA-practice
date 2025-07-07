@@ -20,9 +20,10 @@ public:
         }
         
         while(s[idx]>='0' && s[idx]<='9'){
+           
             // Boundary condition 
-            
-            if(res>INT_MAX/10 || (res==INT_MAX/10 && s[idx]-'0'> 7)){
+            // for the test cases like "21474836460" and "-91283472332"
+               if(res>INT_MAX/10 || (res==INT_MAX/10 && s[idx]-'0'> 7)){
            
                 return sign == 1 ? INT_MAX : INT_MIN;
             }
