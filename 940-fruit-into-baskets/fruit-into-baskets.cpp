@@ -9,20 +9,15 @@ public:
         while(r<n){
             umap[fruits[r]]++;
            
-                while(umap.size()>2){
-                    umap[fruits[l]]--;
-                    if(umap[fruits[l]]==0){
-                        umap.erase(fruits[l]);            
-                    }
-                  l++;
+            if(umap.size()>2){
+                umap[fruits[l]]--;
+                if(umap[fruits[l]]==0){
+                    umap.erase(fruits[l]);            
                 }
-       
-        
-                max_len = max(max_len , r-l+1);
-              
-           
-            r++;
-           
+                l++;
+            }
+            max_len = max(max_len , r-l+1);
+            r++;     
         }
         return max_len;
     }
