@@ -1,48 +1,25 @@
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-
-        //Brute force
-       
-    //    int n = s.length();
-    //     int maxi = 0 ;
-      
-    //    for(int i = 0 ; i<n ; i++){
-    //        int hash[256] = {0};
-    //        for(int j=i ; j<n ;j++){
-    //             if(hash[s[j]]==1){
-    //                 break;
-    //             }
-    //             int len = j-i+1;
-    //             hash[s[j]] = 1;
-    //             maxi = max(len,maxi);
-    //        }
-       
-    //    }
-    //    return maxi;
-
-        // Optimal soln - using two pointer & sliding window + hashmap
-        unordered_map<char,int>hashmap;
+        int l = 0 ; 
+        int r = 0 ; 
+        int max_len = 0;
         int n = s.length();
-        int l = 0 , r= 0;
-        int maxi = 0;
+        unordered_map<char,int>umap;
         int len = 1;
         while(r<n){
-            // if the element is present in the hashmap and the index of which is greater then l  
-            if(hashmap.find(s[r])!=hashmap.end()){
-                if(hashmap[s[r]]>=l){
-                     l = hashmap[s[r]]+1;
-                }         
-            }
-            len = r-l+1; 
-            // storing in the hashmap with its corressponding index 
-            hashmap[s[r]] = r;  
-            maxi = max(maxi , len);
+            
+            if(umap.find(s[r])!= umap.end()){          
+                if(umap[s[r]] >=l){
+                    l = umap[s[r]]+1;
+                }
+            } 
+            len = r-l+1;
+            umap[s[r]] = r;
+            max_len = max(max_len,len);
             r++;
         }
-        if(l==0){
-            return n;
-        }
-        return maxi;
+      
+        return max_len;
     }
 };
