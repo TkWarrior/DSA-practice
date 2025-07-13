@@ -8,7 +8,7 @@ public:
         int n = fruits.size();
         while(r<n){
             umap[fruits[r]]++;
-            if(umap.size()>2){
+           
                 while(umap.size()>2){
                     umap[fruits[l]]--;
                     if(umap[fruits[l]]==0){
@@ -16,11 +16,11 @@ public:
                     }
                   l++;
                 }
-            } 
-            else{
+       
+        
                 max_len = max(max_len , r-l+1);
               
-            }
+           
             r++;
            
         }
