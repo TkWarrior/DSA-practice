@@ -10,16 +10,15 @@ public:
             }
             return;
         }
-       
-         res.push_back(candidates[ind]);
+        
+      // pick
          if(candidates[ind]<=target){
-           
+            res.push_back(candidates[ind]);
              solve(ans , candidates , res , ind , target-candidates[ind]);
-         }
-       
+            res.pop_back();
+         }    
 
-        res.pop_back();
-      
+        //not pick
         solve(ans , candidates , res , ind + 1 , target);
 
     }
