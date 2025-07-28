@@ -1,12 +1,12 @@
 class Solution {
 public:
-    int t[101][201];
+    int t[101][101];
     bool solve(int ind , int count ,  string&s){
         if(ind==s.size()){
             return count==0;      
         }
-         if(t[ind][count+100] != -1){
-            return t[ind][count+100];
+         if(t[ind][count] != -1){
+            return t[ind][count];
         }
         bool isValid = false;
        
@@ -25,14 +25,14 @@ public:
             // false or true will give true
             isValid = isValid|solve(ind+1 , count+1 , s);
        }
-       else {
+       else { // for the s[ind] = ')'
             if(count>0){
                  isValid = isValid|solve(ind+1 , count-1 , s);
             }
            
        }
       
-        return t[ind][count+100] = isValid;
+        return t[ind][count] = isValid;
     }
 
     bool checkValidString(string s) {
