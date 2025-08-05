@@ -35,8 +35,8 @@ public:
             digits1 = i>=0 ? num1[i--] - '0' : 0 ;
             digits2 = j>=0 ? num2[j--] - '0' : 0 ;
             sum = digits1 + digits2 + carry ;
-            char c = (sum%10) + '0';
-            res = c + res ; 
+            // char c = (sum%10) + '0';
+            res = to_string((sum%10)) + res ; 
             carry = sum/10;
         }
 
