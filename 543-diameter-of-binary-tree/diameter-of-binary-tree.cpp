@@ -11,26 +11,26 @@
  */
 class Solution {
 public:
-    // first thought :  leftHeight+rightHeight ; 
+    
     int height(TreeNode* node){
-        if(node==NULL){
-            return 0;
-        }
+        if(node == NULL) return 0 ; 
 
-        int left = height(node->left);
+        int left  = height(node->left);
         int right = height(node->right);
 
-        return 1+max(left,right);
+        return 1 + max(left , right);
     }
+    
     int diameterOfBinaryTree(TreeNode* root) {
-        if(root==NULL){
-            return 0 ; 
-        }
-        
+
+        if(root==NULL) return 0;
+
         int leftHeight = height(root->left);
         int rightHeight = height(root->right);
-        int leftSubTreeDiameter = diameterOfBinaryTree(root->left);
-        int rightSubTreeDiameter = diameterOfBinaryTree(root->right);
-        return max(leftHeight + rightHeight ,max(leftSubTreeDiameter , rightSubTreeDiameter)) ;
+        int leftSubtreeDiameter = diameterOfBinaryTree(root->left);
+        int rightSubtreeDiameter = diameterOfBinaryTree(root->right);
+
+        return max(height(root->left) + height(root->right) , max(leftSubtreeDiameter , rightSubtreeDiameter));
+       
     }
 };
