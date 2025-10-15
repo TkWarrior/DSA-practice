@@ -1,23 +1,23 @@
 class Solution {
 public:
     bool isValid(string s) {
-        unordered_map<char ,char>umap = { {')','('} , {']','['},{'}','{'} };
-        stack<char>st;
+        unordered_map<char,char>umap = {{')' , '('},{'}','{'},{']','['}};
+        stack<char>st ; 
         
-        for(char c:s){
+        for(char c : s){        
             if(umap.find(c)==umap.end()){
                 st.push(c);
-            }
-
-            else if(!st.empty() && umap[c]==st.top()){
+            }else if(!st.empty() && umap[c]==st.top()){
                 st.pop();
-            }
-            else{
+            }else{
                 return false;
             }
-           
         }
 
-       return st.empty();
+        if(st.empty()){
+            return true ; 
+        }
+        return false;
+
     }
 };
