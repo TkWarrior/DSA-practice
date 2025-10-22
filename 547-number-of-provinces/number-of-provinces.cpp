@@ -1,39 +1,38 @@
 class Solution {
 public:
-    void dfs(int node , vector<vector<int>>&adjLs , vector<int>&vis){
-        vis[node] = 1;
-        for(auto it : adjLs[node]){
+     void dfs(vector<vector<int>>&adj , int node  , vector<int>&vis){
+        vis[node] = 1 ; 
+
+        for(auto it : adj[node]){
             if(!vis[it]){
-                dfs(it , adjLs , vis);
+                dfs(adj , it , vis );   
             }
         }
+ 
     }
-    int findCircleNum(vector<vector<int>>& isConnected) {
+    
+    int findCircleNum(vector<vector<int>>& isConnected) {     
+       
         int n = isConnected.size();
-        // converting into adjacency matrix to adjacency list
-        vector<vector<int>>adjLs(n);
+         vector<vector<int>>adj(n) ; 
+         // create the adjacency list first
         for(int i = 0 ; i<n ; i++){
-            for(int j = 0 ; j<n ; j++){
-
-                if(isConnected[i][j]==1 && i != j){
-                    adjLs[i].push_back(j);
-                    adjLs[j].push_back(i);
+            for(int j = 0  ; j<n ; j++){          
+                if(isConnected[i][j] == 1 && i!=j){
+                    adj[i].push_back(j);
+                    adj[j].push_back(i);
                 }
             }
         }
-        int size = adjLs.size();
-        // traversing adjacent list
-        int node = 0 ;
-        int cnt = 0 ;
-        vector<int>vis(n,0);
-
-        for(int i = 0 ; i<n ; i++){
+        vector<int>vis(n , 0);
+        int count = 0 ;
+        // return the the no of of dfs call to unvisited node
+        for (int i =0 ; i<n ; i++){
             if(!vis[i]){
-                cnt++;
-                dfs(i , adjLs , vis);
+                dfs(adj , i , vis);
+                count++;
             }
-        } 
-         return cnt;
         }
-      
-    };
+        return count;
+    }
+};
