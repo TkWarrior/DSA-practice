@@ -1,48 +1,46 @@
 class Solution {
 public:
-    bool isValid(int row , int col , int initialColor , vector<vector<int>>&res , int m , int n ){
-
-        if(row>= 0 && row<m && col>=0 && col<n && res[row][col] == initialColor){
+    bool isValid(vector<vector<int>>&image , int m , int n , int new_i , int new_j ,int old_col ){
+        if(new_i >= 0 && new_i<m && new_j>=0 && new_j<n && image[new_i][new_j]==old_col ){
             return true;
         }
 
         return false;
     }
-    void dfs(vector<vector<int>>&res , vector<vector<int>>&image , int sr ,int sc , int colored , int initialColor){
-        int m = image.size();
-        int n = image[0].size();
-        int row = sr ; 
-        int col = sc ; 
-        if(isValid(row-1 , col , initialColor , res , m , n)){
-            res[row-1][col] = colored ; 
-            dfs(res , image , row-1 , col , colored , initialColor);
-        }
-         if(isValid(row+1 , col , initialColor , res , m , n)){
-            res[row+1][col] = colored ; 
-            dfs(res , image , row+1 , col , colored , initialColor);
-        }
-        if(isValid(row , col-1 , initialColor , res , m , n)){
-            res[row][col-1] = colored ; 
-            dfs(res , image , row , col-1 , colored , initialColor);
-        }
-        if(isValid(row , col+1 , initialColor , res , m , n)){
-            res[row][col+1] = colored ; 
-            dfs(res , image , row , col+1 , colored , initialColor);
-        }
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
+        int m = image.size() ; 
+        int n = image[0].size() ; 
 
-    }
-    
-    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color){
-        
-        vector<vector<int>>res = image; 
-        int initialColor = image[sr][sc];
-        res[sr][sc] = color;
-        if(initialColor == color){
+        vector<vector<int>>dir = {{1,0} , {0,1} ,{-1,0} ,{0,-1}};
+
+        queue<pair<int ,int>>q;
+
+        int old_col = image[sr][sc];// save the copy of old color
+        image[sr][sc] = color ;
+        q.push({sr,sc});
+        if(old_col == color){
             return image;
         }
-        dfs(res , image , sr , sc , color , initialColor);
+        while(!q.empty()){
+            int size = q.size();
+            while(size--){
+                pair<int , int>curr = q.front() ; 
+                q.pop() ; 
+                
+                int old_i = curr.first ;
+                int old_j = curr.second ; 
 
-    return res;   
+                for(vector<int>&arr : dir){
+                    int new_i = old_i + arr[0] ; 
+                    int new_j = old_j + arr[1] ; 
+                    if(isValid(image , m , n , new_i , new_j, old_col)){
+                        image[new_i][new_j] = color ; 
+                        q.push({new_i , new_j});
+                    }
+                }
+            }
+        }
 
+        return image ; 
     }
 };
