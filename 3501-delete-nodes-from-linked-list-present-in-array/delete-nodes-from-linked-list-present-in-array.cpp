@@ -12,34 +12,28 @@ class Solution {
 public:
     ListNode* modifiedList(vector<int>& nums, ListNode* head) {
      
-        ListNode* temp = head ; 
-        unordered_map<int , int >umap ; 
+        unordered_map<int , int>umap ;
 
-        for(int i = 0 ; i<nums.size() ; i++){
-            umap[nums[i]]++ ; 
-        }
+        for(int i = 0 ; i<nums.size() ;i++){
+            umap[nums[i]]++;
+        } 
 
         while(head!=NULL && umap.find(head->val)!=umap.end()){
-            ListNode* curr = head;
-            head = head->next ; 
-          
-        }
-        
-        if(head==NULL) return NULL ;
-        temp = head ;
-        
-        while(temp!=NULL && temp->next!=NULL){
-            
-            if(umap.find(temp->next->val)!=umap.end()){
-                ListNode* curr = temp->next;
-                temp->next = temp->next->next ; 
-                
-            }else{
-                 temp = temp->next ; 
-            }
-           
+            ListNode*curr = head ; 
+            head = head->next ;
         }
 
-        return head ; 
+        ListNode*temp = head ; 
+
+        while(temp!=NULL && temp->next!=NULL){
+            if(umap.find(temp->next->val)!=umap.end()){
+                ListNode* curr = temp->next ; 
+                temp->next = temp->next->next ;
+            }else{
+                temp = temp->next ; 
+            }
+        }
+
+        return head;
     }
 };
