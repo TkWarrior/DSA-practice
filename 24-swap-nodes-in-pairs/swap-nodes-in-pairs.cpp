@@ -12,30 +12,25 @@ class Solution {
 public:
     ListNode* swapPairs(ListNode* head) {
 
-        if(head==NULL || head->next==NULL){
-            return head ; 
+       
+        if(head== NULL || head->next==NULL){
+            return head;
         }
-        // dummy node
-
         ListNode* dummy = new ListNode(0);
-        ListNode*curr = dummy ; 
-       dummy->next = head ; 
 
-        // at least 2 element in the heads to be present to swap the pairs
+        ListNode* curr = dummy ; 
+        dummy->next = head ;
         while(curr->next!=NULL && curr->next->next!=NULL){
-           ListNode*first = curr->next ; 
-           ListNode*second = curr->next->next ; 
+            ListNode*first = curr->next;
+            ListNode*second = curr->next->next ; 
 
-           // swapping
-           first->next = second->next ; 
-           second->next = first ; 
-           curr->next = second;
-
-           // move current node to first 2 steps so that it reaches the end
-           curr = first ; 
+            first->next = second->next;
+            second->next = first ;
+            curr->next = second ;
+            curr = first;
+            
         }
-
-        return dummy->next ; 
+        return dummy->next;
 
     }
 };
