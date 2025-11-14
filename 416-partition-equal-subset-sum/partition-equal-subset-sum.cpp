@@ -8,9 +8,11 @@ public:
         for(int i = 0 ; i<n ; i++){
             sum += nums[i];
         }
-
-        if(sum%2!=0) return false ;
         
+        // kyuki agar sum odd rahe toh kabhi bhi partition karne par equal subset sum nhi banega
+        if(sum%2!=0) return false ;
+
+
         int half = sum/2 ; 
 
         bool dp[n+1][half+1]; // since return type is bool
