@@ -1,42 +1,49 @@
 class Solution {
 public:
-    int maxWeight(vector<int>&weights){
-        int maxi = INT_MIN;
-        for(int i = 0 ; i<weights.size() ; i++){
-            maxi = max(maxi,weights[i]);
-        }
-        return maxi;
-    }
+   
+    bool isPossible(vector<int>& weights , int capacity , int days){
+            int load = 0; // iitially there is no load in the ship
+            int no_of_days = 1 ; // start from the day 1
 
-    int requiredDays(vector<int>&weights , int capacity){
-        int days = 1;
-        int load = 0;
-        for(int i =0 ; i<weights.size() ; i++){
-            if(load+weights[i]>capacity){
-                days++;
-                load = weights[i];
+            for(int i=0 ; i<weights.size() ; i++){
+                // if ship exceeds the capacity
+                if(load + weights[i] > capacity){
+                    load = weights[i] ;// initialize the new weight from the next day
+                    no_of_days++ ; // start from the next day
+                }else{
+                    load += weights[i] ; // add weights within that day itself
+                } 
             }
-            else{
-                load+=weights[i];
-            }
-        }
-        return days;
-    }
 
+            return no_of_days <= days ;
+      
+    }
+    
     int shipWithinDays(vector<int>& weights, int days) {
-        int low = maxWeight(weights);
-        int high = accumulate(weights.begin(),weights.end(),0);
+       
+        int maxi = INT_MIN ; 
+        int n = weights.size() ;
+
+        for(int i = 0 ; i<n ; i++){
+            maxi = max(maxi , weights[i]);
+        }
+
+        int low = maxi ; 
+        int high = accumulate(weights.begin() , weights.end() ,0) ;
+        int ans = 0 ; 
 
         while(low<=high){
-            int mid = (low+high)/2;
-            int totalDays = requiredDays(weights,mid);
-            if(totalDays<=days){
+            int mid = (low+high)/2 ;
+            // if it is possible to ship the packageof of capacity mid 
+            if(isPossible(weights , mid , days)){
+                ans =  mid ; 
                 high = mid-1;
-            }
-            else{
+            }else{
                 low = mid+1;
             }
-        } 
-        return low;   
+        }
+        cout<<ans ;
+        
+       return ans;
     }
 };
