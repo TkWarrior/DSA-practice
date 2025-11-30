@@ -1,34 +1,26 @@
 class Solution {
 public:
-    int LCS(string&s , string&p , int m ){
-        vector<vector<int>>dp(m+1 , vector<int>(m+1));
+    int dp[1001][1001];
+    int lcs(string&s ,string&t , int m , int n  ){
+      
+        if(m==0 || n==0) return 0 ;
 
-        for(int i = 0 ; i<m+1 ; i++){
-            for(int j = 0 ; j<m+1 ;j++){
-                if(i==0 || j==0) dp[i][j] = 0 ;
-            }
+        if(dp[m][n] != -1) return dp[m][n];
+
+        if(s[m-1] == t[n-1]){
+            return dp[m][n] = 1 + lcs(s , t ,m-1 , n-1);
         }
 
-        for(int i = 1 ; i<m+1 ; i++){
-            for(int j = 1 ; j<m+1 ; j++){
-                if(s[i-1]==p[j-1]){
-                    dp[i][j] = 1+dp[i-1][j-1];
-                }else{
-                    dp[i][j] = max(dp[i-1][j] , dp[i][j-1]);
-                }
-            }
-        }
+        return dp[m][n] = max(lcs(s , t ,m-1 , n) , lcs(s,t , m , n-1));
 
-        return dp[m][m];
     }
     int longestPalindromeSubseq(string s) {
-        // if we write the code of lcs dirst and then figure it out
-        // store every palindromic subsequence in the dp and then return the maximum one -  first thought   
-        string p = s ;
-        reverse(p.begin() , p.end());
-        int m = s.size() ; 
-      
-        return LCS(s , p, m);
-       
+        int n =  s.size() ;
+        memset(dp , -1 ,sizeof(dp));
+        string t = s ; 
+        reverse(t.begin() , t.end());
+        int m = t.size() ;
+        return lcs(s, t , m , n);
     }
+       
 };
