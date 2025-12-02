@@ -1,5 +1,6 @@
 class Solution {
 public:
+    // variation of LCS
     int dp[1001][1001];
     int ascii_sum_calc(string&s){
         int sum = 0 ;
@@ -16,6 +17,7 @@ public:
         }
         if(dp[m][n]!=-1) return dp[m][n] ; 
         if(s1[m-1]==s2[n-1]){
+            // only variation (s1[m-1] - 'a' + 97)
             return dp[m][n] = (s1[m-1] - 'a' + 97) + solve(s1 , s2 , m-1 ,n-1);
         }
    
@@ -27,10 +29,11 @@ public:
         int n = s2.size() ;
         memset(dp , -1 , sizeof(dp));
         int lcs = solve(s1 , s2 , m , n);
+        cout<<lcs ;
         string res = "";
         
         int i = m , j = n ; 
-
+        //printing lcs
         while(i>0 && j>0){
             if(s1[i-1]==s2[j-1]){
                 res.push_back(s1[i-1]);
