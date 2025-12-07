@@ -1,33 +1,34 @@
 class Solution {
 public:
     int dp[2501][2501];
-   
-    int lis(vector<int>& nums , int ind ,int prev_ind , int n){   
-      
-        if(ind>=n){
-            return 0 ;
+    int lis(vector<int>&nums , int prev , int ind , int m ){
+       
+        if(ind>=m){
+            return 0 ; 
+        }
+        if(prev != -1 && dp[prev][ind]!=-1){
+            return dp[prev][ind];
         }
         int take = 0 ;
-        if(prev_ind !=-1 && dp[ind][prev_ind]!=-1) return dp[ind][prev_ind];
-        if(prev_ind == -1 || nums[prev_ind]<nums[ind]){
-            take = 1 + lis(nums , ind+1 ,ind ,n);
+        if(prev == -1 || nums[prev]<nums[ind]){
+            take = 1 + lis(nums , ind , ind+1 , m);
         }
         
-       
-        int skip = lis(nums , ind+1 ,prev_ind ,n);
-        
-        if(prev_ind != -1){
-            dp[ind][prev_ind] = max(take ,skip);
+        int skip = lis(nums , prev , ind+1 , m);
+        if(prev!=-1){
+            return dp[prev][ind] = max(take , skip);
         }
         return max(take , skip);
+        
     }
     int lengthOfLIS(vector<int>& nums) {
-        // 0 0 1 2 3 3
-        // 0 1 0 3 2 3
-        // 0 1 2 3
-        int n = nums.size() ; 
-        memset(dp,-1,sizeof(dp));
-        return lis(nums ,0 , -1 ,n);
+       
+       int m = nums.size() ; 
+       memset(dp , -1 ,sizeof(dp));
+       if(m==1) return 1 ;
+        int prev = -1 ;
+        int ind = 0 ;
+       return lis(nums , prev , ind , m);
 
     }
 };
