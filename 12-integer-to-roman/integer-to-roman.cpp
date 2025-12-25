@@ -6,7 +6,13 @@ public:
         string res = "";
 
         for(auto&[val,sym] : mp){
+
+            if(num==0){
+                break ;
+            } 
+            
             int times = num/val ;
+
             while(times--){
                 res += sym;
             }
