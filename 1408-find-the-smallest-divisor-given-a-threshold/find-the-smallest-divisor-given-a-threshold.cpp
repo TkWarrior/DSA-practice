@@ -1,11 +1,11 @@
 class Solution {
 public:
-    
+    // bunary search on answer
     double calculateThreshold(vector<int>& nums , int mid){
         int n = nums.size() ; 
-        double sum = 0 ; 
+        int sum = 0 ; 
         for(int i = 0 ; i<n ; i++){
-            sum += ceil(double(nums[i])/double(mid));
+            sum += (nums[i]+mid-1)/(mid);
         }
 
         return sum ;
