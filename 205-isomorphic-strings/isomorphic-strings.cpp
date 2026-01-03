@@ -11,12 +11,8 @@ public:
 
         for(int i = 0 ; i<n ; i++){
             mp1[s[i]] = i;
+            mp2[t[i]] = i;
         }
-
-        for(int j = 0 ; j<n ; j++){
-            mp2[t[j]] = j;
-        }
-
         for(int k = 0 ; k<n ; k++){
             if(mp1[s[k]] != mp2[t[k]]) return false;
             
