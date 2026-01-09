@@ -1,36 +1,31 @@
 class Solution {
 public:
     vector<int> topKFrequent(vector<int>& nums, int k) {
-        // first we will make store elements with its corressponding frequencies in unoredered map
-        // at this point the element is mapped as {element,frequency} 
-       int n = nums.size();
+        unordered_map<int , int>freq ; 
+        vector<pair<int , int>>ans ;
+        vector<int>res ;
 
-       vector<int>ans;
-
-       unordered_map<int ,int> umap ; 
-
-       for(auto x:nums){
+        // storing the frequency inside the map
+        for(int num : nums){
+            freq[num]++;
+        }
+        
+        // storing the pair of frequency and the associated element
+        for(auto it : freq){
             
-            umap[x]++;
-       }
-       
-
-       priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;
-        // we're storing element in priority queue from minimumm to maximum 
-       for(auto x:umap){
-            pq.push(make_pair(x.second,x.first));
-
-            if(pq.size()>k){
-                pq.pop();
-            }
-       }
-
-       while(!pq.empty()){
-            pair<int,int>temp = pq.top();
-            pq.pop();
-            ans.push_back(temp.second);
-       }
-  
-        return ans;
+            cout<<it.first<<","<<it.second<<endl ;
+            ans.push_back({it.second , it.first});
+        }
+        // printing it for debugging
+        for(pair<int , int>&p :ans){
+            cout<<p.first<<","<<p.second<<endl ;
+        }
+        // sorting in descending order
+        sort(ans.rbegin() , ans.rend());
+        // taking top k elements 
+        for(int i = 0 ; i<k ; i++){
+            res.push_back(ans[i].second);
+        }
+        return res ;
     }
 };
