@@ -1,29 +1,38 @@
 class Solution {
 public:
-   
-       
     int trap(vector<int>& height) {
-        int n = height.size();
-        int total = 0;
-        vector<int>prefixMax(n);
-        prefixMax[0] = height[0];
-        for(int i = 1 ; i<n ; i++){
-            prefixMax[i] = max(prefixMax[i-1],height[i]);
-        }
+       int total = 0 ;
+       int ind = 0 ;
+       int n = height.size();
+       int left_max = 0  ;
+       int right_max = 0;
+       int max_height = height[0];
 
-        vector<int>suffixMax(n);
-        suffixMax[n-1] = height[n-1];
-        for(int i = n-2 ; i>=0 ; i--){
-            suffixMax[i] = max(suffixMax[i+1],height[i]);
-        }
-
-        for(int i = 0 ; i<n ; i++){
-            int leftMax = prefixMax[i];
-            int rightMax = suffixMax[i];
-            if(height[i]<leftMax && height[i]<rightMax){
-                total+= min(leftMax,rightMax)-height[i];
+       for(int i = 1 ; i<n ; i++){
+            if(height[i]>max_height){
+                max_height = height[i];
+                ind = i ; 
+            } 
+       }
+       cout<<ind ;
+        // solving left part
+       for(int i = 0 ; i<ind ; i++){
+            if(left_max>height[i]){
+                total += left_max-height[i];
+            }else{
+                left_max = height[i];
             }
-        }
-        return total;     
+       }
+       // solving for the right part
+
+       for(int i = n-1 ; i>ind ; i--){
+            if(right_max>height[i]){
+                total += right_max-height[i];
+            }else{
+                right_max = height[i];
+            }
+       }
+
+    return total ;
     }
 };
