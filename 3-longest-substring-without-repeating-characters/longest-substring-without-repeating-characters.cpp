@@ -5,19 +5,19 @@ public:
         int l = 0 ; 
         int r = 0 ; 
         int max_length = 0 ;
+        unordered_map<int,int>mp ;
 
-        for(int i = 0 ; i<n ; i++){
-            unordered_map<int,int>mp ; 
-            for(int j = i ; j<n ; j++){
-                if(mp[s[j]]==1){
-                    break ;
-                }
-                int ws = j-i+1;
-                mp[s[j]] = 1 ;
-                max_length = max(max_length , ws);
+        while(r<n){
+            if(mp.find(s[r])!=mp.end()){
+                if(mp[s[r]]>=l){
+                    l = mp[s[r]] + 1;
+                }    
             }
+            max_length = max(max_length , r-l+1);
+            mp[s[r]] = r ;
+            r++ ;
         }
-
+        
         return max_length ;
     }
 };
