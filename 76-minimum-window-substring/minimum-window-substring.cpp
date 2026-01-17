@@ -1,47 +1,50 @@
 class Solution {
 public:
     string minWindow(string s, string t) {
-        int m = s.length();
-        int n = t.length();
-        int l = 0, r = 0;
-        int min_len = INT_MAX;
-        int start_l = 0;
-        int count_required = n;
-       
-        unordered_map<char, int> hashmap;
-        if (n > m) {
+        int m = s.size();
+        int n = t.size();
+        int required_count = n ;
+
+        if(m<n){
             return "";
         }
+        unordered_map<char , int>mp ; 
 
-        for (int i = 0; i < n; i++) {
-            hashmap[t[i]]++;
+        for(char&ch : t){
+            mp[ch]++;
         }
 
-        while (r < m) {
+        int l = 0 ;
+        int r = 0 ;
+        int min_ws = INT_MAX ;
+        int ws = 0 ;
+        int start_l = 0 ;
 
-            if(hashmap[s[r]]>0){
-                count_required--;
+        while(r<m){
+            if(mp[s[r]]>0){
+                required_count--;
             }
+            mp[s[r]]--;
             
-            hashmap[s[r]]--;
-            // as soon count_required becomes start shrinking the window
-            while (count_required == 0) {
-
-                if(min_len > r-l+1){
-                    min_len = r-l+1;
-                     start_l = l;
+            while(required_count == 0){
+                ws = r-l+1 ;
+                if(ws<min_ws){
+                    start_l = l ; // have to do this so that we can extract substring later
+                    min_ws = ws ; 
                 }
-               
-                hashmap[s[l]]++;
-                // if the frequency becomes greater than 0
-                if (hashmap[s[l]] > 0) {
-                    count_required++;
+                mp[s[l]]++;
+                if(mp[s[l]]>0){
+                    required_count++;
                 }
                 l++;
             }
             r++;
         }
-       
-       return min_len == INT_MAX ? "" : s.substr(start_l,min_len);
-    }
+
+        if(min_ws == INT_MAX){
+            return "";
+        }
+
+        return s.substr(start_l , min_ws) ;
+    }   
 };
