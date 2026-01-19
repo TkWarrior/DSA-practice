@@ -13,13 +13,13 @@ public:
                 st.pop();
 
                 if(str == "+"){
-                    st.push(n1+n2);
+                    st.push(n2+n1);
                 }
                 else if(str == "-"){
                     st.push(n2-n1);
                 }
                 else if(str == "*"){
-                    st.push(n1*n2);
+                    st.push(n2*n1);
                 }
                 else if(str == "/"){
                     st.push(n2/n1);
