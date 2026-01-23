@@ -1,27 +1,6 @@
 class Solution {
 public:
-
     int largestRectangleArea(vector<int>& heights) {
-
-        //Brute force approach
-        // int max_area = 0 ; 
-        // int n = heights.size();
-        
-        // for(int i = 0 ; i<n ; i++){
-        //     int min_height = INT_MAX;
-        //     for(int j = i ; j<n ; j++){
-        //         min_height = min(min_height , heights[j]);
-        //         int area = min_height*(j-i+1);
-                
-        //         max_area = max(max_area , area);
-        //     }
-        // }
-        // return max_area;
-
-         //Optimal Approach
-    // area between previous smaller element and next smaller element 
-   
-       
         int n = heights.size();
         int nse[n];
         int pse[n];
@@ -62,6 +41,6 @@ public:
             int area = heights[i]*width;
             max_area = max(max_area,area);
         }
-    return max_area;
+     return max_area;
     }
 };
