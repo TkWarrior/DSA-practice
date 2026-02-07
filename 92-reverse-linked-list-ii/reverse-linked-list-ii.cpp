@@ -11,26 +11,28 @@
 class Solution {
 public:
     ListNode* reverseBetween(ListNode* head, int left, int right) {
-        //store the linked list elements in an array 
-        // Brute force approah 
-        vector<int>nums;
-        ListNode*p = head;
-        while(p!=NULL){
-            nums.push_back(p->val);
-            p = p->next;
+        
+        ListNode* dummy = new ListNode(-1);
+        dummy->next = head ; 
+
+        ListNode* prev = dummy ; 
+
+        for(int i = 1 ; i<left ; i++){
+            prev = prev->next;
         }
-        p = head;
-        for(int i=1 ; i<left ; i++){
-            p=p->next;
+
+        // ListNode* temp = NULL ; 
+        ListNode* curr = prev->next ;
+
+        for(int i = 1 ; i<=(right-left) ; i++){
+            ListNode*temp = prev->next ; 
+            prev->next = curr->next ; 
+            curr->next = curr->next->next ; 
+            prev->next->next = temp ; 
         }
-        int n = nums.size();
-        for(int i = right-1 ; i>= left-1 ; i--){
-            p->val = nums[i];
-            p = p->next;
-        }
-        return head;
+
+        return dummy->next ; 
         
 
     }
-    
 };
