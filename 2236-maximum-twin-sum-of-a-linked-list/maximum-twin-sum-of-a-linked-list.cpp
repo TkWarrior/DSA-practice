@@ -11,35 +11,40 @@
 class Solution {
 public:
     int pairSum(ListNode* head) {
-        ListNode*temp = head ;
-        int n = 0 ;
-        
-        while(temp!=NULL){
-            n++;
-            temp = temp->next;
+       
+       ListNode*slow = head;
+       ListNode*fast = head ;
+        // finding middle of the linked list
+       while(fast!=NULL && fast->next!=NULL){
+            fast = fast->next->next;
+            slow = slow->next ;
+       }
+
+       ListNode*mid = slow;
+
+        // reversing the linked list
+
+        ListNode*prev = NULL ;
+        ListNode*temp = NULL ;
+
+        while(mid!=NULL){
+            temp = mid->next;
+            mid->next = prev;
+            prev = mid;
+            mid = temp;
         }
 
-        int nums[n];
+        // finding max sum
 
-        temp = head;
-        int i = 0 ;
+        int res = 0 ;
+        ListNode*curr = head;
 
-        while(temp!=NULL && i<n){
-            nums[i] = temp->val;
-            temp = temp->next;
-            i++;
-        }
-        
-        for(int n : nums){
-            cout<<n<<endl;
+        while(prev!=NULL){
+            res = max(res , curr->val + prev->val);
+            prev = prev->next;
+            curr = curr->next;
         }
 
-        int maxi = nums[0] ;
-        
-        for(int i = 0 ; i<n/2 ; i++){
-            maxi = max(maxi , nums[i]+nums[n-i-1]);
-        }
-
-        return maxi ;
+        return res ;
     }
 };
