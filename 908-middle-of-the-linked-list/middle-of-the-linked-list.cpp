@@ -11,16 +11,14 @@
 class Solution {
 public:
     ListNode* middleNode(ListNode* head) {
-       ListNode*fast = head ; 
-       ListNode*slow = head ; 
+        ListNode*slow = head;
+        ListNode*fast = head ;
 
-        // fast!=NULL && fast->next!=NULL it means we reached the end of the linked list
-       while(fast!=NULL && fast->next!=NULL){
-            fast = fast->next->next ; 
-            slow = slow->next ; 
-       }
+        while(fast!=NULL && fast->next!=NULL){
+            fast = fast->next->next;
+            slow = slow->next;
+        }
 
-       return slow ; 
-       
+        return slow;
     }
 };
