@@ -16,15 +16,15 @@ public:
         if(j==n){
             return 0 ;
         }
-        
-        while(i<m && j<n){
-            if(s[i]==t[j]){
-                i++;
-                j++;
-            }else{
-                break ;
-            }
-        }
+
+        // while(i<m && j<n){
+        //     if(s[i]==t[j]){
+        //         i++;
+        //         j++;
+        //     }else{
+        //         break ;
+        //     }
+        // }
 
         return n-j;
 
