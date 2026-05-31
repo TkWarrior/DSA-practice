@@ -1,22 +1,32 @@
 class Solution {
 public:
     bool isSubsequence(string s, string t) {
+        
+        map<char , vector<int>>mp;
         int m = s.size();
         int n = t.size();
 
-        int i = 0;
-        int j = 0;
-
-        while(i<m+1 && j<n){
-            if(s[i]==t[j]){
-                i++;
-            }
-            j++;    
+        for(int i = 0 ; i<n ; i++){
+            mp[t[i]].push_back(i);
         }
 
-        if(i==m) return true;
+        int prev = -1;
 
+        for(int i = 0 ; i<m ; i++){
+            
+            if(mp.find(s[i])==mp.end()){
+                return false;
+            }
 
-        return false;
+            vector<int>ind = mp[s[i]];
+            auto it = upper_bound(begin(ind) , end(ind) ,prev);
+
+            if(it == ind.end()){
+                return false;
+            }
+            prev = *it;
+        }
+
+        return true;
     }
 };
