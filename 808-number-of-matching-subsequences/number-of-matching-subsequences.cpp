@@ -9,7 +9,7 @@ public:
             if(mp.find(t[i])==mp.end()){
                 return false;
             }
-            const vector<int>&ind = mp[t[i]];
+            vector<int>&ind = mp[t[i]];
             auto it = upper_bound(begin(ind),end(ind),prev);
 
             if(it==ind.end()){
