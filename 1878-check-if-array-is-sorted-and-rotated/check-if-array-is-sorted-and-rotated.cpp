@@ -1,21 +1,26 @@
 class Solution {
 public:
     bool check(vector<int>& nums) {
-        int c = 0 ;
+        vector<int>arr = nums;
 
-        for(int i = 0 ; i<nums.size()-1 ; i++){
-            if(nums[i+1] < nums[i]){
-                c++ ;
+        sort(arr.begin(),arr.end());
+
+        int k = 0 ;
+        int n = nums.size();
+
+        for(int i = 0 ; i<n-1 ; i++){
+            if(nums[i+1]<nums[i]){
+                k = i+1;
+                break;
             }
         }
 
-        if(nums[nums.size()-1] > nums[0]){
-            c++ ;
-        }
-        if(c == 1 || c==0){
-            return true ;
+        for(int j = 0 ; j<n ; j++){
+            if(nums[(j+k)%n] != arr[j]){
+                return false;
+            }
         }
 
-        return false;
+        return true;
     }
 };
