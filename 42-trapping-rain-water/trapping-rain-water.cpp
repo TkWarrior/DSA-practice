@@ -1,41 +1,35 @@
 class Solution {
 public:
     int trap(vector<int>& height) {
-        stack<int>st;
-        st.push(height[0]);
         int n = height.size();
-        int max_height = height[0] ;
         int ind = 0 ;
-        int water = 0 ;
+        int max_height = height[0];
+        int water = 0;
 
-        for(int i = 1 ; i<n ;i++){
+        for(int i = 1 ; i<n ; i++){
             if(height[i]>max_height){
                 max_height = height[i];
                 ind = i;
             }
         }
-        
-        for(int i = 1 ; i<ind ; i++){
-            if(height[i]>st.top()){
-                st.pop();
-                st.push(height[i]);
+
+        int left_max = 0 ;
+
+        for(int i = 0 ; i<ind ; i++){
+            if(height[i]<left_max){
+                water +=  left_max - height[i] ;
             }else{
-                water += (st.top()-height[i]);
+                left_max = height[i];
             }
         }
-       
-        cout<<st.top();
-        st.pop();
 
-        st.push(height[n-1]);
-      
+        int right_max = 0;
+
         for(int i = n-1 ; i>ind ; i--){
-            if(height[i]>st.top()){
-                st.pop();
-                st.push(height[i]);
+            if(height[i]<right_max){
+                water += right_max - height[i];
             }else{
-                
-                water += (st.top()-height[i]);
+                right_max = height[i];
             }
         }
 
