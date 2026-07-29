@@ -3,11 +3,12 @@ public:
     void sortColors(vector<int>& nums) {
         int l = 0 ;
         int m = 0 ;
-        int h = nums.size()-1;
+        int n = nums.size();
+        int h = n-1;
 
         while(m<=h){
             if(nums[m]==0){
-                swap(nums[m],nums[l]);
+                swap(nums[l],nums[m]);
                 l++;
                 m++;
             }else if(nums[m]==1){
