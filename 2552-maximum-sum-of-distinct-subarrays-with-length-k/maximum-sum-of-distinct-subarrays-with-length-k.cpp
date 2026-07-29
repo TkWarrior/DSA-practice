@@ -1,29 +1,32 @@
 class Solution {
 public:
     long long maximumSubarraySum(vector<int>& nums, int k) {
-        unordered_set<int>st;
+        int i = 0 ;
+        int j = 0 ;
         int n = nums.size();
-        int i = 0 , j = 0 ;
-        long long s = 0;
+        long long s = 0 ;
         long long max_s = 0 ;
+        unordered_set<int>st ;
 
-        while(j<n){
+        while(j<n){ 
             
             while(st.find(nums[j])!=st.end()){
-                st.erase(nums[i]);
                 s -= nums[i];
+                st.erase(nums[i]);
                 i++;
             }
             s += nums[j];
             st.insert(nums[j]);
-
             if(j-i+1 == k){
-                max_s = max(s , max_s);
+                max_s = max(max_s , s);
+                cout<<max_s<<endl;
                 s -= nums[i];
                 st.erase(nums[i]);
                 i++;
             }
+
             j++;
+            
         }
 
         return max_s;
