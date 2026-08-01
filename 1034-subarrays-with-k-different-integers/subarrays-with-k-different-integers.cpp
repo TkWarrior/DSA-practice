@@ -1,10 +1,8 @@
 class Solution {
 public:
-    int solve(vector<int>&nums , int k ){
-        
+    int solve(vector<int>&nums , int k){
         int n = nums.size();
-        int i = 0 ; 
-        int j = 0;
+        int i = 0 , j = 0 ;
         int c = 0 ;
         unordered_map<int,int>mp;
 
@@ -21,11 +19,9 @@ public:
             j++;
         }
 
-        return c;
+        return c ;
     }
-
     int subarraysWithKDistinct(vector<int>& nums, int k) {
-
         return solve(nums,k) - solve(nums,k-1);
     }
 };
