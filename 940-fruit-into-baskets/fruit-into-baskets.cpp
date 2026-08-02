@@ -1,11 +1,11 @@
 class Solution {
 public:
     int totalFruit(vector<int>& fruits) {
-        unordered_map<int,int>mp;
-        int n = fruits.size();
         int i = 0 ;
         int j = 0 ;
-        int maxi = 0 ;
+        unordered_map<int,int>mp;
+        int n = fruits.size();
+        int mx_tree = 0 ;
 
         while(j<n){
             mp[fruits[j]]++;
@@ -15,11 +15,11 @@ public:
                     mp.erase(fruits[i]);
                 }
                 i++;
-            }  
-            maxi = max(maxi , j-i+1);
+            }
+            mx_tree = max(mx_tree , j-i+1);
             j++;
         }
-        
-        return maxi ;
+
+        return mx_tree;
     }
 };
